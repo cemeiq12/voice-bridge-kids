@@ -18,7 +18,7 @@ Helps children recognize and name their feelings.
 ### 🌍 Magical World Builder
 Collaborative storytelling and imagination.
 - **Create**: Child describes a "Happy Place" (e.g., "A candy castle").
-- **Visualize**: The app generates a customized story and a **visual illustration** of their world (using DALL-E/Gemini).
+- **Visualize**: The app generates a customized story and a **visual illustration** of their world (using Gemini).
 
 ### 🧸 Therapeutic Play Time
 Unstructured play scenarios with subtle social-emotional learning goals.
@@ -36,8 +36,8 @@ A simple tool for reporting complex emotions.
 
 ### Prerequisites
 - Node.js 18+
-- Google Cloud Project with Vertex AI enabled
-- OpenAI API Key (for DALL-E)
+- Google Gemini API Key (get from https://aistudio.google.com/apikey)
+- ElevenLabs API Key (for text-to-speech)
 
 ### Installation
 
@@ -55,9 +55,9 @@ A simple tool for reporting complex emotions.
 3.  **Set up environment variables**
     Create a `.env.local` file:
     ```env
-    GOOGLE_VERTEX_AI_API_KEY=your_key_here
-    GOOGLE_GEMINI_MODEL=gemini-1.5-flash-001
-    OPENAI_API_KEY=your_openai_key
+    GOOGLE_VERTEX_AI_API_KEY=your_google_api_key_here
+    ELEVENLABS_API_KEY=your_elevenlabs_key
+    NEXT_PUBLIC_ELEVENLABS_API_KEY=your_elevenlabs_key
     DATABASE_URL="file:./dev.db"
     ```
 
@@ -70,4 +70,4 @@ A simple tool for reporting complex emotions.
     Visit [http://localhost:3000/kids](http://localhost:3000/kids) to enter the Playground.
 
 ## 🛡️ Privacy & Safety
-This application is designed with safety in mind. All AI interactions are prompted to be gentle, supportive, and age-appropriate. No data is shared with third parties beyond the necessary AI providers (Google/OpenAI) for processing.
+This application is designed with safety in mind. All AI interactions are prompted to be gentle, supportive, and age-appropriate. No data is shared with third parties beyond the necessary AI providers (Google Gemini, ElevenLabs) for processing.
