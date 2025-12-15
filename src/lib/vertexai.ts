@@ -743,7 +743,16 @@ export async function generateWorld(
   try {
     const result = await model.generateContent(parts);
     const response = result.response;
-    const jsonString = response.text().replace(/```json/g, '').replace(/```/g, '').trim();
+    const rawText = response.text();
+    
+    // More robust JSON extraction
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      console.error('No JSON found in response:', rawText);
+      throw new Error('No JSON in response');
+    }
+    
+    const jsonString = jsonMatch[0];
     return JSON.parse(jsonString) as WorldBuildResult;
   } catch (error) {
     console.error('Error generating world:', error);
