@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String   @id @default(cuid())
+  email             String   @unique
+  password          String
+  name              String
+  avatar            String?
+
+  // Email verification
+  isEmailVerified   Boolean  @default(false)
+  verificationCode  String?
+  verificationCodeExpiresAt DateTime?
+
+  // Disability profile (stored as JSON string)
+  disabilityType    String   @default("other")
+  disabilitySeverity Int     @default(5)
+  triggerWords      String   @default("[]") // JSON array as string
+  disabilityDescription String?
+
+  // User settings (stored as JSON string)
+  voiceId           String   @default("21m00Tcm4TlvDq8ikWAM")
+  speed             Float    @default(1.0)
+  fontMode          String   @default("default")
+  textSize          String   @default("normal")
+  highContrast      Boolean  @default(false)
+  reducedMotion     Boolean  @default(false)
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  therapySessions   TherapySession[]
+  bridgeExchanges   BridgeExchange[]
+}
+
+model TherapySession {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Session data
+  targetText      String
+  transcribedText String
+  duration        Int      // in seconds
+
+  // Scores
+  accuracy        Float
+  clarityScore    Float
+  overallScore    Float
+
+  // Analysis results (stored as JSON strings)
+  wordAnalysis    String   @default("[]") // JSON array
+  phonemeIssues   String   @default("[]") // JSON array
+  recommendations String   @default("[]") // JSON array
+
+  // Metadata
+  difficulty      String   @default("easy")
+  category        String   @default("General")
+  emotion         String   @default("neutral")
+
+  createdAt       DateTime @default(now())
+}
+
+model BridgeExchange {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Exchange data
+  originalText    String   // Raw/disfluent speech transcript
+  correctedText   String   // AI-corrected fluent text
+  confidence      Float    @default(0)
+  intent          String?  // Detected intent of the speaker
+
+  // Corrections applied (stored as JSON string)
+  corrections     String   @default("[]") // JSON array of correction objects
+
+  // Context
+  context         String?  // Optional context for the conversation
+
+  createdAt       DateTime @default(now())
+}
