@@ -458,10 +458,10 @@ export default function KidsPage() {
     }
 
     return (
-        <div className="min-h-screen bg-sky-100 p-8 font-rounded">
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 font-rounded">
             <div className="max-w-4xl mx-auto">
                 <header className="mb-8 text-center">
-                    <h1 className="text-4xl font-extrabold text-blue-600 mb-6 drop-shadow-sm">
+                    <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 mb-6 drop-shadow-lg">
                         🎈 Voice Playground 🎈
                     </h1>
 
@@ -472,11 +472,11 @@ export default function KidsPage() {
                                 key={p.id}
                                 onClick={() => setSelectedPersona(p.id)}
                                 className={cn(
-                                    "px-4 py-2 rounded-2xl flex items-center gap-2 transition-all border-2",
+                                    "px-4 py-2 rounded-2xl flex items-center gap-2 transition-all border-2 backdrop-blur-sm",
                                     p.bg,
                                     selectedPersona === p.id
-                                        ? "ring-4 ring-offset-2 ring-blue-400 transform scale-105 shadow-md"
-                                        : "opacity-70 hover:opacity-100 hover:scale-105"
+                                        ? "ring-4 ring-offset-2 ring-offset-slate-900 ring-purple-400 transform scale-105 shadow-lg shadow-purple-500/20"
+                                        : "opacity-80 hover:opacity-100 hover:scale-105"
                                 )}
                             >
                                 <span className="text-2xl">{p.icon}</span>
@@ -489,12 +489,12 @@ export default function KidsPage() {
                     </div>
 
                     {/* Tab Switcher */}
-                    <div className="inline-flex bg-white p-2 rounded-full shadow-lg gap-2">
+                    <div className="inline-flex bg-slate-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg shadow-purple-500/10 gap-2 border border-slate-700">
                         <button
                             onClick={() => setActiveTab('practice')}
                             className={cn(
                                 "px-6 py-3 rounded-full font-bold text-lg transition-all",
-                                activeTab === 'practice' ? "bg-blue-500 text-white shadow-md transform scale-105" : "text-gray-500 hover:bg-gray-100"
+                                activeTab === 'practice' ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md shadow-blue-500/30 transform scale-105" : "text-gray-300 hover:bg-slate-700"
                             )}
                         >
                             🎤 Word Fun
@@ -503,7 +503,7 @@ export default function KidsPage() {
                             onClick={() => setActiveTab('mirror')}
                             className={cn(
                                 "px-6 py-3 rounded-full font-bold text-lg transition-all",
-                                activeTab === 'mirror' ? "bg-purple-500 text-white shadow-md transform scale-105" : "text-gray-500 hover:bg-gray-100"
+                                activeTab === 'mirror' ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md shadow-purple-500/30 transform scale-105" : "text-gray-300 hover:bg-slate-700"
                             )}
                         >
                             🪞 Magic Mirror
@@ -512,7 +512,7 @@ export default function KidsPage() {
                             onClick={() => setActiveTab('world')}
                             className={cn(
                                 "px-6 py-3 rounded-full font-bold text-lg transition-all",
-                                activeTab === 'world' ? "bg-indigo-500 text-white shadow-md transform scale-105" : "text-gray-500 hover:bg-gray-100"
+                                activeTab === 'world' ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md shadow-indigo-500/30 transform scale-105" : "text-gray-300 hover:bg-slate-700"
                             )}
                         >
                             🌍 World Builder
@@ -521,7 +521,7 @@ export default function KidsPage() {
                             onClick={() => setActiveTab('play')}
                             className={cn(
                                 "px-6 py-3 rounded-full font-bold text-lg transition-all",
-                                activeTab === 'play' ? "bg-pink-500 text-white shadow-md transform scale-105" : "text-gray-500 hover:bg-gray-100"
+                                activeTab === 'play' ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/30 transform scale-105" : "text-gray-300 hover:bg-slate-700"
                             )}
                         >
                             🧸 Play Time
@@ -530,7 +530,7 @@ export default function KidsPage() {
                             onClick={() => setActiveTab('color')}
                             className={cn(
                                 "px-6 py-3 rounded-full font-bold text-lg transition-all",
-                                activeTab === 'color' ? "bg-teal-500 text-white shadow-md transform scale-105" : "text-gray-500 hover:bg-gray-100"
+                                activeTab === 'color' ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-md shadow-teal-500/30 transform scale-105" : "text-gray-300 hover:bg-slate-700"
                             )}
                         >
                             🎨 Color Palette
@@ -543,8 +543,8 @@ export default function KidsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in fade-in duration-500">
                         {/* Left: Challenge Selection */}
                         <div className="space-y-6">
-                            <div className="bg-white rounded-3xl p-6 shadow-xl border-4 border-white">
-                                <h2 className="text-2xl font-bold text-gray-700 mb-4 text-center">Pick a Sound!</h2>
+                            <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-slate-700">
+                                <h2 className="text-2xl font-bold text-white mb-4 text-center">Pick a Sound!</h2>
                                 <div className="grid grid-cols-3 gap-4">
                                     {CHALLENGES.filter(c => c.type === 'vowel').map(c => (
                                         <button
@@ -553,7 +553,7 @@ export default function KidsPage() {
                                             className={cn(
                                                 "aspect-square rounded-2xl flex flex-col items-center justify-center transition-all transform hover:scale-110",
                                                 c.color,
-                                                selectedChallenge.id === c.id ? "ring-4 ring-offset-2 ring-blue-500 scale-105 shadow-lg" : "opacity-90 hover:opacity-100"
+                                                selectedChallenge.id === c.id ? "ring-4 ring-offset-2 ring-offset-slate-800 ring-purple-400 scale-105 shadow-lg shadow-purple-500/30" : "opacity-90 hover:opacity-100"
                                             )}
                                         >
                                             <span className="text-4xl mb-1">{c.icon}</span>
@@ -563,8 +563,8 @@ export default function KidsPage() {
                                 </div>
                             </div>
 
-                            <div className="bg-white rounded-3xl p-6 shadow-xl border-4 border-white">
-                                <h2 className="text-2xl font-bold text-gray-700 mb-4 text-center">Pick a Word!</h2>
+                            <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-6 shadow-xl border border-slate-700">
+                                <h2 className="text-2xl font-bold text-white mb-4 text-center">Pick a Word!</h2>
                                 <div className="grid grid-cols-3 gap-4">
                                     {CHALLENGES.filter(c => c.type === 'word').map(c => (
                                         <button
@@ -573,7 +573,7 @@ export default function KidsPage() {
                                             className={cn(
                                                 "aspect-square rounded-2xl flex flex-col items-center justify-center transition-all transform hover:scale-105",
                                                 c.color,
-                                                selectedChallenge.id === c.id ? "ring-4 ring-offset-2 ring-blue-500 scale-105 shadow-lg" : "opacity-90 hover:opacity-100"
+                                                selectedChallenge.id === c.id ? "ring-4 ring-offset-2 ring-offset-slate-800 ring-purple-400 scale-105 shadow-lg shadow-purple-500/30" : "opacity-90 hover:opacity-100"
                                             )}
                                         >
                                             <span className="text-4xl mb-1">{c.icon}</span>
@@ -597,10 +597,10 @@ export default function KidsPage() {
                             </div>
 
                             {/* Controls */}
-                            <div className="bg-white rounded-3xl p-8 shadow-xl text-center">
+                            <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-700 text-center">
                                 {!result ? (
                                     <>
-                                        <div className="mb-6 h-16 bg-gray-100 rounded-2xl overflow-hidden flex items-center justify-center">
+                                        <div className="mb-6 h-16 bg-slate-700/50 rounded-2xl overflow-hidden flex items-center justify-center">
                                             {isRecording ? (
                                                 <AudioWaveform isActive={true} />
                                             ) : (
@@ -613,7 +613,7 @@ export default function KidsPage() {
                                             disabled={isProcessing}
                                             className={cn(
                                                 "w-24 h-24 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-105 active:scale-95",
-                                                isRecording ? "bg-red-500 hover:bg-red-600 animate-pulse" : "bg-blue-500 hover:bg-blue-600"
+                                                isRecording ? "bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 animate-pulse shadow-red-500/40" : "bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 shadow-blue-500/40"
                                             )}
                                         >
                                             {isProcessing ? (
@@ -716,22 +716,22 @@ export default function KidsPage() {
                 {/* MIRROR MODE */}
                 {activeTab === 'mirror' && (
                     <div className="max-w-2xl mx-auto animate-in slide-in-from-right duration-500">
-                        <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-purple-100 text-center">
+                        <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-purple-500/30 text-center">
                             <div className="mb-8">
-                                <div className="w-32 h-32 bg-purple-100 rounded-full mx-auto flex items-center justify-center text-6xl shadow-inner mb-4 transition-transform hover:scale-110">
+                                <div className="w-32 h-32 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mx-auto flex items-center justify-center text-6xl shadow-lg shadow-purple-500/30 mb-4 transition-transform hover:scale-110">
                                     {mirrorResult ? mirrorResult.emoji : '🦉'}
                                 </div>
-                                <h2 className="text-3xl font-black text-purple-600 mb-2">
+                                <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-2">
                                     {mirrorResult ? "I hear you..." : "Tell me how you feel!"}
                                 </h2>
-                                <p className="text-xl text-gray-500 font-medium">
+                                <p className="text-xl text-gray-300 font-medium">
                                     {mirrorResult ? "Here is a magic thought:" : "I am listening... Say anything!"}
                                 </p>
                             </div>
 
                             {!mirrorResult ? (
                                 <div className="mb-8">
-                                    <div className="h-24 bg-gray-50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
+                                    <div className="h-24 bg-slate-700/50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
                                         {isRecording ? <AudioWaveform isActive={true} /> : <span className="text-gray-400 font-bold">Press mic & speak (e.g., "I'm sad!")</span>}
                                     </div>
                                     <button
@@ -739,7 +739,7 @@ export default function KidsPage() {
                                         disabled={isProcessing}
                                         className={cn(
                                             "w-24 h-24 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95",
-                                            isRecording ? "bg-red-500 animate-pulse" : "bg-purple-500 hover:bg-purple-600"
+                                            isRecording ? "bg-gradient-to-r from-red-500 to-pink-500 animate-pulse shadow-red-500/40" : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-purple-500/40"
                                         )}
                                     >
                                         {isProcessing ? (
@@ -783,24 +783,24 @@ export default function KidsPage() {
                 {/* WORLD BUILDER MODE */}
                 {activeTab === 'world' && (
                     <div className="max-w-2xl mx-auto animate-in slide-in-from-right duration-500">
-                        <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-indigo-100 text-center">
-                            <h2 className="text-3xl font-black text-indigo-600 mb-6">
+                        <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-indigo-500/30 text-center">
+                            <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 mb-6">
                                 🌍 Magical World Builder
                             </h2>
 
                             {!worldResult ? (
                                 <div className="space-y-8">
-                                    <div className="p-6 bg-indigo-50 rounded-2xl">
-                                        <p className="text-xl text-indigo-800 font-medium mb-4">
+                                    <div className="p-6 bg-indigo-500/20 rounded-2xl border border-indigo-500/30">
+                                        <p className="text-xl text-indigo-200 font-medium mb-4">
                                             Describe your happy place!
                                         </p>
-                                        <p className="text-sm text-indigo-600">
+                                        <p className="text-sm text-indigo-300">
                                             "A castle made of candy..."<br />
                                             "A forest where trees can talk..."
                                         </p>
                                     </div>
 
-                                    <div className="h-24 bg-gray-50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
+                                    <div className="h-24 bg-slate-700/50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
                                         {isRecording ? <AudioWaveform isActive={true} /> : <span className="text-gray-400 font-bold">Press mic & describe...</span>}
                                     </div>
 
@@ -809,7 +809,7 @@ export default function KidsPage() {
                                         disabled={isProcessing}
                                         className={cn(
                                             "w-24 h-24 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 mx-auto",
-                                            isRecording ? "bg-red-500 animate-pulse" : "bg-indigo-500 hover:bg-indigo-600"
+                                            isRecording ? "bg-gradient-to-r from-red-500 to-pink-500 animate-pulse shadow-red-500/40" : "bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 shadow-indigo-500/40"
                                         )}
                                     >
                                         {isProcessing ? (
@@ -853,47 +853,47 @@ export default function KidsPage() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <button
                                     onClick={() => { setPlayScenario('magic_clay'); setPlayHistory([]); }}
-                                    className="bg-white p-6 rounded-3xl shadow-xl border-4 border-amber-200 hover:scale-105 transition-transform"
+                                    className="bg-gradient-to-br from-amber-500 to-orange-500 p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform border border-amber-400/50"
                                 >
                                     <div className="text-6xl mb-4">🎨</div>
-                                    <h3 className="text-xl font-black text-amber-600">Magic Clay</h3>
-                                    <p className="text-gray-500 text-sm mt-2">Let's make funny shapes!</p>
+                                    <h3 className="text-xl font-black text-white">Magic Clay</h3>
+                                    <p className="text-amber-100 text-sm mt-2">Let's make funny shapes!</p>
                                 </button>
                                 <button
                                     onClick={() => { setPlayScenario('grumpy_dragon'); setPlayHistory([]); }}
-                                    className="bg-white p-6 rounded-3xl shadow-xl border-4 border-red-200 hover:scale-105 transition-transform"
+                                    className="bg-gradient-to-br from-red-500 to-rose-500 p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform border border-red-400/50"
                                 >
                                     <div className="text-6xl mb-4">🐲</div>
-                                    <h3 className="text-xl font-black text-red-600">Grumpy Dragon</h3>
-                                    <p className="text-gray-500 text-sm mt-2">Why is he so grumpy?</p>
+                                    <h3 className="text-xl font-black text-white">Grumpy Dragon</h3>
+                                    <p className="text-red-100 text-sm mt-2">Why is he so grumpy?</p>
                                 </button>
                                 <button
                                     onClick={() => { setPlayScenario('picnic'); setPlayHistory([]); }}
-                                    className="bg-white p-6 rounded-3xl shadow-xl border-4 border-green-200 hover:scale-105 transition-transform"
+                                    className="bg-gradient-to-br from-green-500 to-emerald-500 p-6 rounded-3xl shadow-xl hover:scale-105 transition-transform border border-green-400/50"
                                 >
-                                    <div className="text-6xl mb-4">🧺</div>
-                                    <h3 className="text-xl font-black text-green-600">Picnic Party</h3>
-                                    <p className="text-gray-500 text-sm mt-2">Let's have a snack!</p>
+                                    <div className="text-6xl mb-4">🧂</div>
+                                    <h3 className="text-xl font-black text-white">Picnic Party</h3>
+                                    <p className="text-green-100 text-sm mt-2">Let's have a snack!</p>
                                 </button>
                             </div>
                         ) : (
-                            <div className="bg-white rounded-3xl shadow-2xl border-4 border-pink-100 overflow-hidden flex flex-col h-[600px]">
+                            <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl shadow-2xl border border-pink-500/30 overflow-hidden flex flex-col h-[600px]">
                                 {/* Chat Header */}
-                                <div className="bg-pink-100 p-4 flex items-center justify-between">
-                                    <h3 className="font-black text-pink-600 text-xl flex items-center gap-2">
+                                <div className="bg-gradient-to-r from-pink-500 to-rose-500 p-4 flex items-center justify-between">
+                                    <h3 className="font-black text-white text-xl flex items-center gap-2">
                                         {playScenario === 'magic_clay' ? '🎨 Magic Clay' :
-                                            playScenario === 'grumpy_dragon' ? '🐲 Grumpy Dragon' : '🧺 Picnic'}
+                                            playScenario === 'grumpy_dragon' ? '🐲 Grumpy Dragon' : '🧂 Picnic'}
                                     </h3>
                                     <button
                                         onClick={() => setPlayScenario(null)}
-                                        className="text-pink-400 font-bold hover:text-pink-600 text-sm"
+                                        className="text-pink-100 font-bold hover:text-white text-sm"
                                     >
                                         Change Game ↩️
                                     </button>
                                 </div>
 
                                 {/* Chat Area */}
-                                <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-pink-50/50">
+                                <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-900/50">
                                     {playHistory.length === 0 && (
                                         <div className="text-center text-gray-400 my-8">
                                             <p className="text-4xl mb-2">🎈</p>
@@ -908,21 +908,21 @@ export default function KidsPage() {
                                             <div className={cn(
                                                 "p-4 rounded-2xl text-lg font-medium shadow-sm",
                                                 msg.role === 'user'
-                                                    ? "bg-blue-500 text-white rounded-br-none"
-                                                    : "bg-white text-gray-700 border border-gray-100 rounded-bl-none"
+                                                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-br-none"
+                                                    : "bg-slate-700 text-gray-100 border border-slate-600 rounded-bl-none"
                                             )}>
                                                 {msg.content}
                                             </div>
                                             {msg.action && (
-                                                <span className="text-xs text-gray-400 mt-1 italic pl-2">{msg.action}</span>
+                                                <span className="text-xs text-gray-500 mt-1 italic pl-2">{msg.action}</span>
                                             )}
                                         </div>
                                     ))}
                                 </div>
 
                                 {/* Controls */}
-                                <div className="p-4 bg-white border-t border-gray-100 flex items-center justify-center gap-4">
-                                    <div className="h-16 flex-1 bg-gray-50 rounded-2xl flex items-center justify-center px-4">
+                                <div className="p-4 bg-slate-800 border-t border-slate-700 flex items-center justify-center gap-4">
+                                    <div className="h-16 flex-1 bg-slate-700/50 rounded-2xl flex items-center justify-center px-4">
                                         {isRecording ? <AudioWaveform isActive={true} /> : <span className="text-gray-400 text-sm">Waiting for you...</span>}
                                     </div>
                                     <button
@@ -930,7 +930,7 @@ export default function KidsPage() {
                                         disabled={isProcessing}
                                         className={cn(
                                             "w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-105 active:scale-95",
-                                            isRecording ? "bg-red-500 animate-pulse" : "bg-pink-500 hover:bg-pink-600"
+                                            isRecording ? "bg-gradient-to-r from-red-500 to-pink-500 animate-pulse shadow-red-500/40" : "bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 shadow-pink-500/40"
                                         )}
                                     >
                                         {isProcessing ? (
@@ -948,8 +948,8 @@ export default function KidsPage() {
                 {/* COLOR REPORTER MODE */}
                 {activeTab === 'color' && (
                     <div className="max-w-4xl mx-auto animate-in fade-in duration-500">
-                        <div className="bg-white rounded-3xl p-8 shadow-2xl border-4 border-teal-100 text-center">
-                            <h2 className="text-3xl font-black text-teal-600 mb-6">
+                        <div className="bg-slate-800/60 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-teal-500/30 text-center">
+                            <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400 mb-6">
                                 🎨 Color My Feeling
                             </h2>
 
@@ -975,9 +975,9 @@ export default function KidsPage() {
                                         </button>
                                     ))}
                                 </div>
-                            ) : (
+                                ) : (
                                 <div className="space-y-8 animate-in slide-in-from-bottom duration-500">
-                                    <div className="flex items-center justify-between bg-teal-50 p-4 rounded-xl">
+                                    <div className="flex items-center justify-between bg-teal-500/20 p-4 rounded-xl border border-teal-500/30">
                                         <div className="flex items-center gap-3">
                                             <div className={cn(
                                                 "w-8 h-8 rounded-full",
@@ -986,18 +986,18 @@ export default function KidsPage() {
                                                         selectedColor === 'Blue' ? 'bg-blue-400' :
                                                             selectedColor === 'Green' ? 'bg-green-500' : 'bg-gray-800'
                                             )} />
-                                            <span className="font-bold text-gray-700">Reporting a {selectedColor} feeling</span>
+                                            <span className="font-bold text-white">Reporting a {selectedColor} feeling</span>
                                         </div>
-                                        <button onClick={() => setSelectedColor(null)} className="text-gray-400 hover:text-gray-600">Cancel</button>
+                                        <button onClick={() => setSelectedColor(null)} className="text-gray-400 hover:text-white">Cancel</button>
                                     </div>
 
                                     {!colorResult ? (
                                         <>
-                                            <p className="text-xl text-gray-600 font-medium">
-                                                Tell me about your <span className="font-bold">{selectedColor}</span> feeling...
+                                            <p className="text-xl text-gray-300 font-medium">
+                                                Tell me about your <span className="font-bold text-white">{selectedColor}</span> feeling...
                                             </p>
 
-                                            <div className="h-32 bg-gray-50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
+                                            <div className="h-32 bg-slate-700/50 rounded-2xl mb-6 flex items-center justify-center overflow-hidden">
                                                 {isRecording ? <AudioWaveform isActive={true} /> : <span className="text-gray-400 font-bold">Press mic & speak...</span>}
                                             </div>
 
@@ -1006,7 +1006,7 @@ export default function KidsPage() {
                                                 disabled={isProcessing}
                                                 className={cn(
                                                     "w-24 h-24 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 mx-auto",
-                                                    isRecording ? "bg-red-500 animate-pulse" : "bg-teal-500 hover:bg-teal-600"
+                                                    isRecording ? "bg-gradient-to-r from-red-500 to-pink-500 animate-pulse shadow-red-500/40" : "bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 shadow-teal-500/40"
                                                 )}
                                             >
                                                 {isProcessing ? (
