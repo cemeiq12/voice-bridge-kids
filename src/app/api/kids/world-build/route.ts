@@ -1,34 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateWorld } from '@/lib/vertexai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export const runtime = 'nodejs';
 
 async function generateImage(prompt: string): Promise<string | undefined> {
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GOOGLE_VERTEX_AI_API_KEY;
     if (!apiKey) return undefined;
 
     try {
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+        const genAI = new GoogleGenerativeAI(apiKey);
+        
+        // Use Gemini's image generation model (Nano Banana)
+        const model = genAI.getGenerativeModel({ 
+            model: 'gemini-2.0-flash-exp-image-generation',
+            generationConfig: {
+                // @ts-ignore - responseModalities is valid for image generation
+                responseModalities: ['Text', 'Image'],
             },
-            body: JSON.stringify({
-                model: "dall-e-3",
-                prompt: `A cute, magical, child-friendly illustration of: ${prompt}. Soft colors, storybook style.`,
-                n: 1,
-                size: "1024x1024"
-            })
         });
 
-        if (!response.ok) {
-            console.error("OpenAI Image Gen failed", await response.text());
-            return undefined;
+        const imagePrompt = `A cute, magical, child-friendly illustration of: ${prompt}. Soft colors, storybook style, whimsical, safe for children.`;
+        
+        const result = await model.generateContent(imagePrompt);
+        const response = result.response;
+        
+        // Extract image from response parts
+        for (const part of response.candidates?.[0]?.content?.parts || []) {
+            if (part.inlineData) {
+                // Return as data URL for direct use in img src
+                return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+            }
         }
-
-        const data = await response.json();
-        return data.data[0].url;
+        
+        console.log("No image in Gemini response");
+        return undefined;
     } catch (error) {
         console.error('Image generation error:', error);
         return undefined;
